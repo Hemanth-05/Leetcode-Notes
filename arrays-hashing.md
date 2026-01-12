@@ -27,3 +27,29 @@ for (int x : nums) {
 }
 return false;
 ```
+
+## Two Sum
+
+**When to use**
+- Find two elements that add up to a target
+- Need indices, not values
+
+**Data Structure**
+- `unordered_map<int, int>` (value → index)
+
+**Key Method**
+- `mp.find(need) != mp.end()`
+
+**Core Idea**
+- For each element x at index i:
+  - compute need = target - x
+  - if need exists in map → return indices
+  - otherwise store x with its index
+- Check before inserting to avoid using the same element twice
+
+**Why not set?**
+- Because indices are required
+
+**Time / Space**
+- O(n) / O(n)
+
