@@ -53,3 +53,34 @@ return false;
 **Time / Space**
 - O(n) / O(n)
 
+## Valid Anagram
+
+**When to use**
+- Check if two strings contain the same characters
+- Order does NOT matter
+- Frequency of characters matters
+
+**Key Observation**
+- Anagrams must have the same length
+- Each character must appear the same number of times in both strings
+
+**Data Structure**
+- `unordered_map<char, int>` (character → frequency)
+
+**Core Idea**
+- If lengths differ → not an anagram
+- Count frequency of characters in first string
+- For second string:
+  - if character not found → false
+  - decrement frequency
+  - if frequency goes below zero → false
+
+**Why this works**
+- Ensures same characters with same counts
+- Prevents subset/superset cases
+
+**Time / Space**
+- Time: O(n)
+- Space: O(1) (bounded by alphabet size)
+
+
