@@ -28,6 +28,7 @@ for (int x : nums) {
 return false;
 ```
 
+
 ## Two Sum
 
 **When to use**
@@ -52,6 +53,7 @@ return false;
 
 **Time / Space**
 - O(n) / O(n)
+
 
 ## Valid Anagram
 
@@ -82,5 +84,53 @@ return false;
 **Time / Space**
 - Time: O(n)
 - Space: O(1) (bounded by alphabet size)
+
+## Group Anagrams
+
+**When to use**
+- Need to group strings that are anagrams of each other
+- Order of characters does NOT matter
+- Comparing every pair would be too slow
+
+**Key Insight**
+- Comparing all pairs → O(n² · k) ❌
+- Instead, give each word a **canonical representation (key)**
+- All anagrams share the same key
+
+**Canonical Key**
+Two valid ways:
+1. **Sorting-based key** - To eliminate the order of the string
+   - Sort characters of the word
+   - Example: "eat", "tea", "ate" → "aet"
+
+2. **Frequency-based key**
+   - Count frequency of each character
+   - Same counts → same group
+
+**Data Structure**
+- `unordered_map<key, vector<string>>`
+- Key → identifies the anagram group
+- Value → list of words in that group
+
+**Core Idea**
+- For each word:
+  - compute its key
+  - push the word into `mp[key]`
+- After processing all words:
+  - return all map values (groups)
+
+**Important C++ Trick**
+- `mp[key].push_back(word)`
+  - creates key if it doesn’t exist
+  - appends if it already exists
+
+**Why this works**
+- All anagrams map to the same key
+- No pairwise comparison needed
+
+**Time / Space**
+- Time: O(n · k log k) with sorting key  
+- Space: O(n · k)
+
 
 
