@@ -158,6 +158,76 @@ Two valid ways:
   - Time: O(n · k)
   - Space: O(n · k)
 
+## Top K Frequent Elements
+For this we have two approaches: 
+- Sorting 0(n log n)
+- Bucket 0(n)
+)
+### Sorting Approach
+
+**When to use**
+- Need K most frequent elements
+- Simple implementation preferred
+- O(n log n) is acceptable
+
+**Core Idea**
+- Create a map with elements->frequency
+- Convert map to pair: elements->frequency to pair(element, frequency)
+- Sort pairs on frequency
+- Now retrive top K pairs based on frequency
+
+**Data Structures**
+- unordered_map<int,int> → number → frequency
+- vector<pair<int,int>> → (number, frequency)
+
+**Why this works**
+- Sorting places highest frequencies first
+- Top K automatically at front
+
+**Complexity**
+Time:  O(n log n)  
+Space: O(n)
+
+**Pattern**
+Count → Convert → Sort → Take K
+
+
+
+
+### Bucket approach
+
+**When to use**
+- Need better than O(n log n)
+- Want near linear time
+- Frequency range is bounded (≤ n)
+
+**Key Idea**
+- Use frequency as an index
+- Group numbers by how many times they appear
+- Avoid sorting completely
+
+**Data Structures**
+- unordered_map<int,int> → number → frequency
+- vector<vector<int>> → index = frequency, value = list of numbers
+
+**Steps**
+1. In this we first create a map with element->frequency.
+2. Create a vector of vectors, basically a list(array). The thinking is that we will keep the frequency as index and whatever the elements we have for that frequency, we place it in that index. If there are multiple, we can make a list, whats why we are using vector of vectors.
+3. Once the list is done, its time to traverse the list from last index (Highest frequency) until we get k elements.
+4. Once we get k elements, we break out of the loop
+
+**Why this works**
+- Direct placement by frequency (no comparisons)
+- Highest frequency found first by reverse traversal
+
+**Complexity**
+Time:  O(n)
+Space: O(n)
+
+**Pattern**
+Count → Bucket → Reverse scan → Take K
+
+
 
 
 
