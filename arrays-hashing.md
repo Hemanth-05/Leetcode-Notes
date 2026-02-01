@@ -87,6 +87,10 @@ return false;
 
 ## Group Anagrams
 
+**Example**
+Input: ["eat","tea","tan","ate","nat","bat"]
+Output: [["eat","tea","ate"],["tan","nat"],["bat"]]
+
 **When to use**
 - Need to group strings that are anagrams of each other
 - Order of characters does NOT matter
@@ -106,6 +110,13 @@ Two valid ways:
 2. **Frequency-based key**
    - Count frequency of each character
    - Same counts → same group
+      - Build a fixed-size frequency array of 26 letters (a–z)
+      - Each index represents a character count
+      - index 0 → 'a', index 1 → 'b', ..., index 25 → 'z'
+      - Convert the frequency array into a string key using separators
+      - Example: "eat" → "1#0#0#0#1#...#1#"
+      - All anagrams produce the same frequency key
+
 
 **Data Structure**
 - `unordered_map<key, vector<string>>`
@@ -128,9 +139,25 @@ Two valid ways:
 - All anagrams map to the same key
 - No pairwise comparison needed
 
+**Why Frequency Key is Efficient**
+- Avoids sorting each word
+- Counting characters takes O(k)
+- Fixed alphabet size (26) keeps key construction fast
+- Better for longer strings compared to sorting
+
+**C++ Implementation Notes**
+- Prefer `array<int, 26>` over `vector<int>` for fixed alphabets
+- Use `char - 'a'` to map characters to indices
+- Use `const string&` when iterating to avoid copies
+
 **Time / Space**
-- Time: O(n · k log k) with sorting key  
-- Space: O(n · k)
+- Sorting-based key:
+  - Time: O(n · k log k)
+  - Space: O(n · k)
+- Frequency-based key:
+  - Time: O(n · k)
+  - Space: O(n · k)
+
 
 
 
