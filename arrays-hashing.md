@@ -225,7 +225,7 @@ Time:  O(n)
 Space: O(n)
 
 **Pattern**
-Count → Bucket → Reverse scan → Take K
+Count → Bucket → Reverse scan → Take K.
 
 
 
