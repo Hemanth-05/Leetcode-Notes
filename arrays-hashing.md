@@ -227,6 +227,49 @@ Space: O(n)
 **Pattern**
 Count → Bucket → Reverse scan → Take K.
 
+## Encode and Decode Strings
+
+**When to use**
+- Need to convert a list of strings into a single string
+- Data must be transmitted or stored as one string
+- Must be decoded back without ambiguity
+
+**Key Observation**
+- Using a delimiter between strings is unsafe (strings may contain it)
+- Length information removes ambiguity
+- Metadata + payload pattern is required
+
+**Data Structure**
+- Encoding: `string`
+- Decoding: `vector<string>`
+
+**Core Idea**
+- Encode each string as:
+  - `length : string`
+- Concatenate all encoded parts into one string
+- While decoding:
+  - read digits until `:`
+  - convert digits → length `L`
+  - read next `L` characters as the string
+  - repeat until end
+
+**Example**
+["Hello", "World", "3:abc"] → "5:Hello5:World5:3:abc"
+
+**Why this works**
+- Length determines payload boundaries
+- Payload may contain any characters (`:`, digits, symbols)
+- No guessing or splitting needed
+
+**Pattern to Remember**
+- Length-prefixed encoding
+- Index-based decoding (pointer jumps)
+
+**Time / Space**
+- Time: O(n) total characters
+- Space: O(n) for encoded string / decoded output
+
+
 
 
 
