@@ -269,6 +269,9 @@ Count → Bucket → Reverse scan → Take K.
 - Time: O(n) total characters
 - Space: O(n) for encoded string / decoded output
 
+## Product of Array Except Self
+- Goal is simple! Build a left product array and build a right product array and then do the product of both.
+
 
 
 
