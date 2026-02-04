@@ -272,6 +272,69 @@ Count → Bucket → Reverse scan → Take K.
 ## Product of Array Except Self
 - Goal is simple! Build a left product array and build a right product array and then do the product of both.
 
+## Valid Sudoku
+
+**Problem**
+Check whether a given 9×9 Sudoku board is valid.
+- Digits `1–9` must not repeat in:
+  - any **row**
+  - any **column**
+  - any **3×3 box**
+- Empty cells are represented by `'.'` and should be ignored.
+
+---
+
+**Core Idea**
+While scanning the board, we only care whether a digit has been **seen before** in a specific scope (row / column / box).
+
+Since we only need a *presence check*, a **set** is sufficient.
+
+---
+
+**Row Check**
+- Traverse each row one by one.
+- Use a set to track digits seen in the current row.
+- If a digit already exists in the set → return `false`.
+- Clear the set after finishing each row.
+
+---
+
+**Column Check**
+- Traverse each column one by one.
+- Similar to rows, use a set for each column.
+- If a duplicate is found → return `false`.
+- Clear the set after each column.
+
+---
+
+**3×3 Box Check**
+- The board contains **9 boxes**, each of size 3×3.
+- Each box starts at indices where:
+  - row ∈ `{0, 3, 6}`
+  - col ∈ `{0, 3, 6}`
+- For every box:
+  - start at `(startRow, startCol)`
+  - scan the 3×3 area:
+    - rows: `startRow → startRow + 2`
+    - cols: `startCol → startCol + 2`
+  - use a set to track seen digits
+  - clear the set after finishing each box
+
+---
+
+**Important Notes**
+- Always **skip `'.'`** (empty cells).
+- If any duplicate is found in row, column, or box → return `false`.
+- If all checks pass → return `true`.
+
+---
+
+**Optimization Note**
+- Since we only check *existence*, `unordered_set<char>` is preferred over `unordered_map<char, int>`.
+- Time Complexity: **O(81)** → effectively constant
+- Space Complexity: **O(9)** per check
+
+
 
 
 
