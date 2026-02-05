@@ -282,14 +282,10 @@ Check whether a given 9×9 Sudoku board is valid.
   - any **3×3 box**
 - Empty cells are represented by `'.'` and should be ignored.
 
----
-
 **Core Idea**
 While scanning the board, we only care whether a digit has been **seen before** in a specific scope (row / column / box).
 
 Since we only need a *presence check*, a **set** is sufficient.
-
----
 
 **Row Check**
 - Traverse each row one by one.
@@ -297,15 +293,11 @@ Since we only need a *presence check*, a **set** is sufficient.
 - If a digit already exists in the set → return `false`.
 - Clear the set after finishing each row.
 
----
-
 **Column Check**
 - Traverse each column one by one.
 - Similar to rows, use a set for each column.
 - If a duplicate is found → return `false`.
 - Clear the set after each column.
-
----
 
 **3×3 Box Check**
 - The board contains **9 boxes**, each of size 3×3.
@@ -320,14 +312,10 @@ Since we only need a *presence check*, a **set** is sufficient.
   - use a set to track seen digits
   - clear the set after finishing each box
 
----
-
 **Important Notes**
 - Always **skip `'.'`** (empty cells).
 - If any duplicate is found in row, column, or box → return `false`.
 - If all checks pass → return `true`.
-
----
 
 **Optimization Note**
 - Since we only check *existence*, `unordered_set<char>` is preferred over `unordered_map<char, int>`.
@@ -335,8 +323,16 @@ Since we only need a *presence check*, a **set** is sufficient.
 - Space Complexity: **O(9)** per check
 
 
+## Longest Consecutive Sequence
+- Main point before starting: Do we need to sort the array to find the longest consecutive sequence? **NO. Not Required!**
+- Data Structure we can use: unordered_set
 
+**Core Idea**
+- Check if the element we chose is the starting element  
+    How do we know if its the starting. For an element x, check if x-1 exists, if it does, skip it. If not, then its the starting element. Once we find the starting, we can go forward.
 
+**Implementation**
+- We usually use 2 loops here. Outer loop is to check if the element chosen is starting or not.
+- Inner loop is to move forward. We only move forward when we know that its the starting element.
 
-
-
+NOTE: Always make sure the outerloop is done on the unordered_set and not the input array/vector. In this way we can eliminate the duplicates and reduce unnecesserly doing duplicate checks. Otherwise we will get **Time Limit Exceeded error**.
